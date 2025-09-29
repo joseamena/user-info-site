@@ -67,21 +67,21 @@
 </head>
 <body>
     <div class="container">
-        <h2>Redeem Your Prize</h2>
+        <h2>Reclama tu premio!</h2>
         <form id="userForm" autocomplete="on">
-            <label for="firstName">First Name</label>
+            <label for="firstName">Nombre</label>
             <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
 
-            <label for="lastName">Last Name</label>
+            <label for="lastName">Apellido</label>
             <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
 
-            <label for="phone">Phone Number</label>
+            <label for="phone">Número de Teléfono</label>
             <input type="tel" id="phone" name="phone" required autocomplete="tel" pattern="[0-9\-\+\s]{7,15}">
 
-            <label for="email">Email Address</label>
+            <label for="email">Dirección de Correo Electrónico</label>
             <input type="email" id="email" name="email" required autocomplete="email">
 
-            <button type="submit">Submit</button>
+            <button type="submit">Enviar</button>
         </form>
         <div id="message"></div>
     </div>
@@ -92,13 +92,17 @@
             return params.get('brand') || '';
         }
         function applyBrandTheme(brand) {
+            console.log('applyBrandTheme called with brand:', brand);
             if (brand === 'super-duper') {
-                document.body.style.background = 'url("super-duper.png") center center / cover no-repeat';
+                document.body.style.background = 'url("backgrounds/super-duper.png") center center / cover no-repeat';
+                console.log('Applied super-duper background');
             } else {
                 document.body.style.background = '#f7f7f7';
+                console.log('Applied default background');
             }
         }
         const brand = getBrandFromURL();
+        console.log('Brand from URL:', brand);
         applyBrandTheme(brand);
 
         document.getElementById('userForm').addEventListener('submit', function(e) {

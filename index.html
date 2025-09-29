@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prize Redemption Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f7f7;
+            transition: background 0.3s;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2em 1em;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            margin-top: 2em;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        label {
+            display: block;
+            margin-top: 1em;
+            font-size: 1.1em;
+        }
+        input {
+            width: 100%;
+            padding: 0.7em;
+            margin-top: 0.3em;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 0.9em;
+            margin-top: 1.5em;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        button:active {
+            background: #0056b3;
+        }
+        @media (max-width: 500px) {
+            .container {
+                max-width: 98vw;
+                margin-top: 1em;
+                padding: 1em 0.5em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Redeem Your Prize</h2>
+        <form id="userForm" autocomplete="on">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required autocomplete="tel" pattern="[0-9\-\+\s]{7,15}">
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+
+            <button type="submit">Submit</button>
+        </form>
+        <div id="message"></div>
+    </div>
+    <script>
+        // Brand background logic
+        function getBrandFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('brand') || '';
+        }
+        function applyBrandTheme(brand) {
+            if (brand === 'super-duper') {
+                document.body.style.background = 'url("super-duper.png") center center / cover no-repeat';
+            } else {
+                document.body.style.background = '#f7f7f7';
+            }
+        }
+        const brand = getBrandFromURL();
+        applyBrandTheme(brand);
+
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('message').innerHTML = '<span style="color:green">Thank you! We will send you a confirmation email soon.</span>';
+            this.reset();
+        });
+    </script>
+</body>
+</html>

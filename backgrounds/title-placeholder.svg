@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160">
+    <defs>
+        <linearGradient id="titleGradient" x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0%" stop-color="#ffef74"/>
+            <stop offset="55%" stop-color="#ffb02e"/>
+            <stop offset="100%" stop-color="#f36b1b"/>
+        </linearGradient>
+        <filter id="shadow" x="-15%" y="-25%" width="130%" height="150%">
+            <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="rgba(0,0,0,0.45)"/>
+        </filter>
+    </defs>
+    <rect width="320" height="160" rx="28" fill="#222d47"/>
+    <rect x="8" y="8" width="304" height="144" rx="24" fill="url(#titleGradient)" filter="url(#shadow)"/>
+    <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="'Fredoka One', 'Baloo 2', sans-serif" font-size="40" fill="#1a1a1a" letter-spacing="2">
+        TITLE
+    </text>
+    <text x="50%" y="78%" dominant-baseline="middle" text-anchor="middle" font-family="'Baloo 2', sans-serif" font-size="20" fill="#1a1a1a" letter-spacing="4">
+        PLACEHOLDER
+    </text>
+</svg>

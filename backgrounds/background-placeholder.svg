@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+    <defs>
+        <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6ddae8"/>
+            <stop offset="100%" stop-color="#2c9ab5"/>
+        </linearGradient>
+        <pattern id="texture" width="140" height="140" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
+            <rect width="140" height="140" fill="none" stroke="rgba(255, 255, 255, 0.09)" stroke-width="3"/>
+            <circle cx="70" cy="70" r="14" fill="rgba(255, 255, 255, 0.08)"/>
+        </pattern>
+    </defs>
+    <rect width="1200" height="1600" fill="url(#bgGrad)"/>
+    <rect width="1200" height="1600" fill="url(#texture)"/>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="rgba(255, 255, 255, 0.65)" font-size="68" font-family="Arial, sans-serif" font-weight="700" letter-spacing="6">
+        BACKGROUND PLACEHOLDER
+    </text>
+</svg>

@@ -1,113 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prize Redemption Form</title>
+    <title>Catch Game | Llena tus datos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f7f7f7;
-            transition: background 0.3s;
+        :root {
+            --page-background-image: url('backgrounds/background-placeholder.svg');
+            /* TODO: Replace backgrounds/background-placeholder.svg with the final background image */
         }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 2em 1em;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border-radius: 12px;
-            margin-top: 2em;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 1em;
-        }
-        label {
-            display: block;
-            margin-top: 1em;
-            font-size: 1.1em;
-        }
-        input {
-            width: 100%;
-            padding: 0.7em;
-            margin-top: 0.3em;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1em;
+
+        * {
             box-sizing: border-box;
         }
-        button {
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Baloo 2', 'Trebuchet MS', sans-serif;
+            background-color: #4b4f55;
+            color: #15333f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: var(--page-background-image) center center / cover no-repeat;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 29, 35, 0.35);
+            z-index: -1;
+        }
+
+        .card {
+            width: min(520px, 100%);
+            background: linear-gradient(185deg, #69d6e4 0%, #39adc5 100%);
+            border: 3px solid rgba(215, 244, 255, 0.9);
+            border-radius: 28px;
+            padding: 2.75rem 2.4rem 2.4rem;
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            border-radius: 22px;
+            pointer-events: none;
+        }
+
+        .card-logo {
+            display: block;
+            width: 148px;
+            margin: 0 auto 1.75rem;
+            filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+        }
+
+        .card-logo img {
+            display: block;
             width: 100%;
-            padding: 0.9em;
-            margin-top: 1.5em;
-            background: #007bff;
-            color: #fff;
+        }
+
+        .card h1 {
+            font-family: 'Fredoka One', 'Baloo 2', cursive;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            letter-spacing: 0.08em;
+            color: #06262e;
+            margin: 0 0 2.2rem;
+        }
+
+        form {
+            display: grid;
+            gap: 1.4rem 1.1rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            position: relative;
+            z-index: 1;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label,
+        legend {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.45rem;
+            letter-spacing: 0.02em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"] {
+            border-radius: 14px;
+            border: 2px solid rgba(158, 211, 226, 0.95);
+            background: linear-gradient(180deg, #f7fbfc 0%, #d9e4eb 100%);
+            padding: 0.85rem 1rem;
+            font-size: 1rem;
+            color: #1c3844;
+            box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.75);
+        }
+
+        input::placeholder {
+            color: rgba(71, 95, 104, 0.7);
+            font-weight: 500;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ffd653;
+            box-shadow: 0 0 0 3px rgba(255, 201, 71, 0.35);
+        }
+
+        fieldset {
             border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 1.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .gender-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .gender-options input[type="radio"] {
+            accent-color: #ffb400;
+            transform: scale(1.1);
+        }
+
+        button {
+            grid-column: 1 / -1;
+            margin-top: 0.4rem;
+            border: none;
+            border-radius: 999px;
+            padding: 0.95rem;
+            font-family: 'Fredoka One', 'Baloo 2', cursive;
+            font-size: 1.1rem;
+            letter-spacing: 0.04em;
+            color: #1f1f1f;
+            background: linear-gradient(180deg, #ffe36b 0%, #ff9d10 65%, #f26d1c 100%);
+            box-shadow: 0 12px 0 rgba(180, 75, 7, 0.45), inset 0 4px 0 rgba(255, 255, 255, 0.85);
             cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
         button:active {
-            background: #0056b3;
+            transform: translateY(4px);
+            box-shadow: 0 6px 0 rgba(180, 75, 7, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.6);
         }
-        @media (max-width: 500px) {
-            .container {
-                max-width: 98vw;
-                margin-top: 1em;
-                padding: 1em 0.5em;
+
+        #message {
+            grid-column: 1 / -1;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 1.8rem 1rem;
             }
-            h2 {
-                font-size: 1.3em;
+
+            .card {
+                padding: 2.2rem 1.6rem 2.2rem;
+            }
+
+            form {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Reclama tu premio!</h2>
+    <main class="card">
+        <a class="card-logo" href="#">
+            <!-- TODO: Replace backgrounds/title-placeholder.svg with the final title/logo image -->
+            <img src="backgrounds/title-placeholder.svg" alt="Título del juego - Imagen temporal">
+        </a>
+        <h1>Llena tus datos</h1>
         <form id="userForm" autocomplete="on">
-            <label for="firstName">Nombre</label>
-            <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
-
-            <label for="lastName">Apellido</label>
-            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
-
-            <label for="phone">Número de Teléfono</label>
-            <input type="tel" id="phone" name="phone" required autocomplete="tel" pattern="[0-9\-\+\s]{7,15}">
-
-            <label for="email">Dirección de Correo Electrónico</label>
-            <input type="email" id="email" name="email" required autocomplete="email">
-
-            <button type="submit">Enviar</button>
+            <div class="field">
+                <label for="firstName">Nombre</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Tu nombre" required autocomplete="given-name">
+            </div>
+            <div class="field">
+                <label for="lastName">Apellido</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Tu apellido" required autocomplete="family-name">
+            </div>
+            <div class="field full-width">
+                <label for="email">Correo</label>
+                <input type="email" id="email" name="email" placeholder="sunombre@dominio.com" required autocomplete="email">
+            </div>
+            <div class="field">
+                <label for="phone">Celular</label>
+                <input type="tel" id="phone" name="phone" placeholder="0999999999" required autocomplete="tel" pattern="[0-9\\-\\+\\s]{7,15}">
+            </div>
+            <div class="field">
+                <label for="birthDate">Fecha de Nacimiento</label>
+                <input type="text" id="birthDate" name="birthDate" placeholder="MM-DD-AAAA" required autocomplete="bday">
+            </div>
+            <fieldset class="full-width">
+                <legend>Género</legend>
+                <div class="gender-options">
+                    <label for="genderMale">
+                        <input type="radio" id="genderMale" name="gender" value="masculino" required>
+                        Masculino
+                    </label>
+                    <label for="genderFemale">
+                        <input type="radio" id="genderFemale" name="gender" value="femenino">
+                        Femenino
+                    </label>
+                    <label for="genderOther">
+                        <input type="radio" id="genderOther" name="gender" value="otro">
+                        Otro
+                    </label>
+                </div>
+            </fieldset>
+            <button type="submit">Continuar</button>
+            <div id="message"></div>
         </form>
-        <div id="message"></div>
-    </div>
+    </main>
     <script>
-        // Brand background logic
         function getBrandFromURL() {
             const params = new URLSearchParams(window.location.search);
             return params.get('brand') || '';
         }
+
         function applyBrandTheme(brand) {
-            console.log('applyBrandTheme called with brand:', brand);
+            const root = document.documentElement;
             if (brand === 'super-duper') {
-                document.body.style.background = 'url("backgrounds/super-duper.png") center center / cover no-repeat';
+                root.style.setProperty('--page-background-image', 'url("backgrounds/super-duper.png")');
                 console.log('Applied super-duper background');
             } else {
-                document.body.style.background = '#f7f7f7';
-                console.log('Applied default background');
+                root.style.setProperty('--page-background-image', 'url("backgrounds/background-placeholder.svg")');
+                console.log('Applied placeholder background');
             }
+            // TODO: Update the URLs above once the final background asset is provided.
         }
+
         const brand = getBrandFromURL();
-        console.log('Brand from URL:', brand);
         applyBrandTheme(brand);
 
-        document.getElementById('userForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('message').innerHTML = '<span style="color:green">Thank you! We will send you a confirmation email soon.</span>';
+        document.getElementById('userForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('message').innerHTML = '<span style="color:#17691c">¡Gracias! Te enviaremos una confirmación pronto.</span>';
             this.reset();
         });
     </script>

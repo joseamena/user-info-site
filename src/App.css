@@ -1,101 +1,254 @@
-/* Mobile-friendly styles */
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #0d2c3b;
+}
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background: #f7f7f7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #3d3d3d;
+  background-image: radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 55%);
 }
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2em 1em;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border-radius: 12px;
-  margin-top: 2em;
+
+.app {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-h2 {
+
+.form-card {
+  position: relative;
+  width: min(560px, 100%);
+  padding: 44px 54px 52px;
+  border-radius: 24px;
+  border: 4px solid rgba(243, 250, 251, 0.85);
+  background-color: #33c0cf;
+  background-image:
+    linear-gradient(160deg, rgba(89, 220, 230, 0.88) 0%, rgba(20, 142, 162, 0.94) 100%),
+    url('/placeholders/form-panel-texture.svg');
+  /* TODO: Replace url('/placeholders/form-panel-texture.svg') with the provided background texture once available. */
+  background-size: cover;
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.35);
   text-align: center;
-  margin-bottom: 1em;
 }
-label {
-  display: block;
-  margin-top: 1em;
-  font-size: 1.1em;
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border-radius: 16px;
+  border: 2px solid rgba(247, 252, 254, 0.65);
+  pointer-events: none;
 }
-input {
+
+.form-card__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.form-card__badge {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.15));
+  border-radius: 50%;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.27);
+  padding: 18px;
+}
+
+.form-card__logo {
   width: 100%;
-  padding: 0.7em;
-  margin-top: 0.3em;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1em;
-  box-sizing: border-box;
+  height: auto;
+  object-fit: contain;
 }
-button {
+
+.form-card h1 {
+  margin: 0;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #081f28;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.form-card__form {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-card__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px 24px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+.form-field__label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0a2831;
+  text-transform: capitalize;
+  letter-spacing: 0.01em;
+}
+
+.form-field input {
   width: 100%;
-  padding: 0.9em;
-  margin-top: 1.5em;
-  background: #007bff;
-  color: #fff;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 2px solid rgba(8, 36, 44, 0.25);
+  background: linear-gradient(180deg, #ffffff 0%, #dbe4e8 100%);
+  box-shadow:
+    inset 0 3px 5px rgba(0, 0, 0, 0.12),
+    0 4px 0 rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  line-height: 1.3;
+  color: #08212a;
+}
+
+.form-field input::placeholder {
+  color: rgba(8, 33, 42, 0.45);
+  font-weight: 600;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.18),
+    0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+.form-field--fieldset {
   border: none;
-  border-radius: 6px;
-  font-size: 1.1em;
+  padding: 0;
+  margin: 0;
+}
+
+.form-field--fieldset legend {
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.form-card__radio-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.radio-option input[type='radio'] {
+  width: 18px;
+  height: 18px;
+  accent-color: #ef7d00;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.form-card__cta {
+  align-self: center;
+  margin-top: 10px;
+  padding: 12px 48px;
+  border: none;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #ffe27a, #f59e00 65%, #c46a00 100%);
+  color: #1f1302;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.5),
+    0 8px 0 rgba(139, 65, 0, 0.75),
+    0 12px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
-button:active {
-  background: #0056b3;
+
+.form-card__cta:active {
+  transform: translateY(4px);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    0 4px 0 rgba(139, 65, 0, 0.75),
+    0 6px 12px rgba(0, 0, 0, 0.25);
 }
-@media (max-width: 500px) {
-  .container {
-    max-width: 98vw;
-    margin-top: 1em;
-    padding: 1em 0.5em;
+
+.form-card__message {
+  position: relative;
+  z-index: 1;
+  margin-top: 26px;
+  min-height: 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #08212a;
+}
+
+.form-card__message[data-status='success'] {
+  color: #0f5c38;
+}
+
+.form-card__message[data-status='error'] {
+  color: #8c1f1f;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 16px;
   }
-  h2 {
-    font-size: 1.3em;
+
+  .form-card {
+    padding: 36px 28px 44px;
   }
-}
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  .form-card__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form-card__radio-group {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .form-card__cta {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.3rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

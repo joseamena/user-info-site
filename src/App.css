@@ -29,10 +29,7 @@ body {
   border-radius: 24px;
   border: 4px solid rgba(243, 250, 251, 0.85);
   background-color: #33c0cf;
-  background-image:
-    linear-gradient(160deg, rgba(89, 220, 230, 0.88) 0%, rgba(20, 142, 162, 0.94) 100%),
-    url('/placeholders/form-panel-texture.svg');
-  /* TODO: Replace url('/placeholders/form-panel-texture.svg') with the provided background texture once available. */
+  background-image: url('/backgrounds/super-duper.png');
   background-size: cover;
   box-shadow:
     0 18px 36px rgba(0, 0, 0, 0.35),

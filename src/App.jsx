@@ -7,24 +7,33 @@ function getBrandFromURL() {
 }
 
 function applyBrandTheme(brand) {
+  const root = document.documentElement;
+  const defaultPlaceholder =
+    'url("https://via.placeholder.com/1600x900/0f172a/ffffff?text=Hero+Background")';
+
   if (brand === 'super-duper') {
-    document.body.style.background = 'url("/backgrounds/super-duper.png") center center / cover no-repeat';
+    root.style.setProperty('--hero-background-image', 'url("/backgrounds/super-duper.png")');
   } else {
-    document.body.style.background = '#f7f7f7';
+    root.style.setProperty('--hero-background-image', defaultPlaceholder);
+    // TODO: Replace the placeholder URL above with the final default hero background image.
   }
+
+  document.body.style.backgroundColor = '#f1f5f9';
+  document.body.style.backgroundImage = 'none';
 }
 
 export default function App() {
   const [message, setMessage] = useState('');
   const brand = getBrandFromURL();
+  const isSuccessMessage = message.startsWith('¡Gracias');
 
   useEffect(() => {
     applyBrandTheme(brand);
   }, [brand]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
     const data = {
       firstName: form.firstName.value,
       lastName: form.lastName.value,
@@ -41,6 +50,7 @@ export default function App() {
         },
         body: JSON.stringify(data),
       });
+
       if (response.ok) {
         setMessage('¡Gracias! Te enviaremos un correo de confirmación pronto.');
         form.reset();
@@ -54,24 +64,93 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <h2>Reclama tu premio!</h2>
-      <form id="userForm" autoComplete="on" onSubmit={handleSubmit}>
-        <label htmlFor="firstName">Nombre</label>
-        <input type="text" id="firstName" name="firstName" required autoComplete="given-name" />
+    <div className="app-shell">
+      <section className="hero">
+        <div className="hero__content">
+          {/* TODO: Replace the src below with the final title graphic once available. */}
+          <img
+            className="hero__logo"
+            src="https://via.placeholder.com/360x120/ffffff/0f172a?text=Tu+logo+aqu%C3%AD"
+            alt="Nombre de la promoción"
+          />
+          <h1>Reclama tu premio</h1>
+          <p>
+            Completa el formulario para validar tu participación y recibir el premio exclusivo que
+            preparamos para ti.
+          </p>
+          <ul className="hero__highlights">
+            <li>Confirmación directa en tu correo electrónico.</li>
+            <li>Seguimiento personalizado durante el proceso.</li>
+            <li>Beneficios adicionales para clientes seleccionados.</li>
+          </ul>
+        </div>
+      </section>
 
-        <label htmlFor="lastName">Apellido</label>
-        <input type="text" id="lastName" name="lastName" required autoComplete="family-name" />
+      <main className="form-section">
+        <div className="form-card">
+          <h2>Ingresa tus datos</h2>
+          <p className="form-subtitle">
+            Usa la misma información con la que te registraste para que podamos validar tu identidad
+            correctamente.
+          </p>
 
-        <label htmlFor="phone">Número de Teléfono</label>
-        <input type="tel" id="phone" name="phone" required autoComplete="tel" pattern="[0-9\-\+\s]{7,15}" />
+          <form id="userForm" autoComplete="on" onSubmit={handleSubmit} className="form-grid">
+            <label htmlFor="firstName">Nombre</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              autoComplete="given-name"
+              placeholder="Escribe tu nombre"
+            />
 
-        <label htmlFor="email">Dirección de Correo Electrónico</label>
-        <input type="email" id="email" name="email" required autoComplete="email" />
+            <label htmlFor="lastName">Apellido</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              autoComplete="family-name"
+              placeholder="Escribe tu apellido"
+            />
 
-        <button type="submit">Enviar</button>
-      </form>
-      <div id="message" style={{ marginTop: '1em', color: message.startsWith('¡Gracias') ? 'green' : 'red' }}>{message}</div>
+            <label htmlFor="phone">Número de teléfono</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              autoComplete="tel"
+              inputMode="tel"
+              pattern="[0-9+\\-\\s]{7,15}"
+              placeholder="Ej. +34 600 000 000"
+            />
+
+            <label htmlFor="email">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autoComplete="email"
+              placeholder="tucorreo@ejemplo.com"
+            />
+
+            <button type="submit">Enviar</button>
+          </form>
+
+          {message && (
+            <div className={`form-message ${isSuccessMessage ? 'is-success' : 'is-error'}`} role="status">
+              {message}
+            </div>
+          )}
+
+          <small className="form-disclaimer">
+            Al enviar este formulario aceptas que nos comuniquemos contigo para completar la gestión del premio.
+          </small>
+        </div>
+      </main>
     </div>
   );
 }
